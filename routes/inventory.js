@@ -37,7 +37,7 @@ inventory.get("/getlist",(req,res)=>{
     if(req.query.ayurvedic){
         const viewInventory = Inventory.find({ayurvedic:true},(err,result)=>{
             if(err){
-                res.status(501).send("An error occured in the server")
+                res.status(501).send("An error occured in the server now")
             }
             else{
                 res.send(result)
@@ -47,6 +47,7 @@ inventory.get("/getlist",(req,res)=>{
     else{ const viewInventory = Inventory.find({ayurvedic:false},(err,result)=>{
         if(err){
             console.log(err);
+            console.log("This is an error")
 
         }
         else{
