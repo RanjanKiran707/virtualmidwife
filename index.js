@@ -108,7 +108,7 @@ app.use("/forum",forum);
 app.use("/diet",diet);
 
 app.get("/",(req,res)=>{
-    res.send(`You have reached the server for HackBites TEMP team.`)
+    res.send(`You have reached the server for Symbiot VAR TEMP team.`)
 })
 app.post("/adduser",async (req,res)=>{
     const user = new User({
