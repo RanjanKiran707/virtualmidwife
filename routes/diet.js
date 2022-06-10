@@ -36,7 +36,7 @@ diet.get("/start",(req,res)=>{
                 console.log(err)
             }
             else{
-                console.log("Water intake updated to zero")
+                console.log("Water intake updated")
             }
         })
     })
