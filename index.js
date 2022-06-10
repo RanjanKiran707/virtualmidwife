@@ -28,7 +28,7 @@ const port = process.env.PORT||4000
 }).then(()=>{
     console.log("Mongo connection successful!")
 }).catch(()=>{
-    console.log("Error in connecting to the database!")
+    console.log("Error in connecting to the database! and going")
 })
 
 app.use(express.json());
