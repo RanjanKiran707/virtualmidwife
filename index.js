@@ -120,7 +120,7 @@ app.post("/adduser",async (req,res)=>{
          res.send("Success in adding the user!")  
     }
     catch(err){
-        console.log("Error in adding new users")
+        console.log("Error in adding new users!")
     }
 })   
 
