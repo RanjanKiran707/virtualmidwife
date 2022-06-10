@@ -78,10 +78,10 @@ const handleUpload = async (req,res,next)=>{
                 else{
                     var array = JSON.parse("["+body+"]");
                     console.log(array[-1]);
-                    if(array[-1]=="1"){
+                    if(array[-1]==1){
                         res.send([...array,"Normal"])
                     }
-                    else if(array[-1]=="2"){
+                    else if(array[-1]==2){
                         res.send([...array,"Suspect"])
                     }
                     else{
