@@ -25,8 +25,7 @@ auth.post('/register', async (req, res) => {
                     age:req.body.age,
                     email:req.body.email,
                     password:req.body.password,
-                    pid:val,
-                    partnerNumber:req.body.number
+                    pid:val
                })
                try{
                    console.log("Reached the register route 7:20");

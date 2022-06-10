@@ -7,7 +7,7 @@ userdetails.post("/", (req, res) => {
     var bmi = (req.body.weight / (req.body.height * req.body.height)) * 10000;
     bmi = Math.ceil(bmi)
 
-    var newValues = { $set: { bmi: bmi, daysSincePregnant: req.body.pregnantDays } };
+    var newValues = { $set: { bmi: bmi, daysSincePregnant: req.body.pregnantDays,  partnerNumber:req.body.number } };
     const userinfo = User.updateOne({ email: req.query.email }, newValues, (err) => {
         if (err) {
             console.log(err)
@@ -32,7 +32,7 @@ userdetails.post("/addinfo",(req,res)=>{
                 weight:req.body.weight,
                 bp:req.body.bp,
                 heart:req.body.heart,
-                temperature:req.body.temperature
+                temperature:req.body.temperature,
             }
             const addvalue = {$push:{tracker:[newValues]}};
             const updatevals = User.updateOne({email:req.body.email},addvalue,(err,result)=>{
