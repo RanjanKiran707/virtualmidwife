@@ -59,7 +59,7 @@ const handleUpload = async (req,res,next)=>{
             var res1 = await ocrSpace(`./reports/test.pdf`, {apiKey:'K87663152988957'})
             res1 = res1.ParsedResults[0].ParsedText;
             var newstring = res1.split(" ").join("");
-            newstring=newstring.replace(/(\r\n|\n|\r)/gm, "");
+            newspacestring=newstring.replace(/(\r\n|\n|\r)/gm, "");
             console.log(newstring)
 
             // https.get(`https://dry-coast-77112.herokuapp.com/?info=${newstring}`,(resp,err)=>{
@@ -71,20 +71,21 @@ const handleUpload = async (req,res,next)=>{
             //     }
                 
             // })
-            requestmod(`https://dry-coast-77112.herokuapp.com/?info=${newstring}`,(err,rest,body)=>{
+            requestmod(`https://dry-coast-77112.herokuapp.com/?info=${newspacestring}`,(err,rest,body)=>{
                 if(err){
                     console.log(err)
                 }
                 else{
-                    console.log(body[1]);
-                    if(body[1]=="1"){
-                        res.send("Normal")
+                    var array = JSON.parse("["+body+"]");
+                    console.log(array[-1]);
+                    if(array[-1]=="1"){
+                        res.send([array,"Normal"])
                     }
-                    else if(body[1]=="2"){
-                        res.send("Suspect")
+                    else if(array[-1]=="2"){
+                        res.send([array,"Suspect"])
                     }
                     else{
-                        res.send("Pathological")
+                        res.send([array,"Pathological"])
                     }
                 }
             })
