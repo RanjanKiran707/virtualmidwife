@@ -13,6 +13,15 @@ const orders = require('./routes/orders');
 const userinfo = require('./routes/userinfo');
 const cookieParser = require('cookie-parser');
 const diet = require('./routes/diet');
+const {ocrSpace}=require('ocr-space-api-wrapper');
+const fs = require('fs')
+const path = require('path')
+const requestmod= require("request");
+const multer = require('multer');
+const { request } = require('http');
+const upload = multer({})
+var number = 4
+
 const port = process.env.PORT||4000
  mongoose.connect('mongodb+srv://Pratap11:QY6we3pEfj5uvlDe@cluster0.oejn7.mongodb.net/?retryWrites=true&w=majority',{
     useNewUrlParser:true 
@@ -23,6 +32,7 @@ const port = process.env.PORT||4000
 })
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 app.get("/viewusers",async (req,res)=>{
     const user = User.findOne({name:"Pratap Simha"},(err,userObj)=>{
 
@@ -38,6 +48,45 @@ app.get("/viewusers",async (req,res)=>{
 })
 
 
+
+const handleUpload = async (req,res,next)=>{
+    
+    number +=1;
+    const tmp = await fs.writeFileSync(
+        path.join(__dirname, `./reports/test.pdf`),
+        req.files[0].buffer)
+        try{
+            var res1 = await ocrSpace(`./reports/test.pdf`, {apiKey:'K87663152988957'})
+            res1 = res1.ParsedResults[0].ParsedText;
+            var newstring = res1.split(" ").join("");
+            newstring=newstring.replace(/(\r\n|\n|\r)/gm, "");
+            console.log(newstring)
+
+            // https.get(`https://dry-coast-77112.herokuapp.com/?info=${newstring}`,(resp,err)=>{
+            //     if(err){
+            //         console.log(err)
+            //     }
+            //     else{
+            //         console.log(resp)
+            //     }
+                
+            // })
+            requestmod(`https://dry-coast-77112.herokuapp.com/?info=${newstring}`,(err,res,body)=>{
+                if(err){
+                    console.log(err)
+                }
+                else{
+                    console.log(body)
+                }
+            })
+
+        }
+        catch{
+            console.log("Error");
+        }
+    // const upl = fs.writeFileSync(path.join(__dirname, '/test.pdf'), file);
+    // res.send("file has been uploaded");
+}
 
 
 app.use("/auth", auth);
@@ -65,6 +114,17 @@ app.post("/adduser",async (req,res)=>{
     }
 })   
 
+// app.post("/getocr",async (req,res)=>{
+    // try{
+    //     const res1 = await ocrSpace('./sample.pdf', {apiKey:'K87663152988957'})
+    //     console.log(res1)
+    // }
+    // catch{
+    //     console.log("Error");
+    // }
+// })
+
+app.post("/fileupload",upload.any(),handleUpload)
 
 app.listen(port,(err)=>{
     if(err){
