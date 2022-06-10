@@ -76,7 +76,16 @@ const handleUpload = async (req,res,next)=>{
                     console.log(err)
                 }
                 else{
-                    res.send(body)
+                    console.log(body[1]);
+                    if(body[1]=="1"){
+                        res.send("Normal")
+                    }
+                    else if(body[1]=="2"){
+                        res.send("Suspect")
+                    }
+                    else{
+                        res.send("Pathological")
+                    }
                 }
             })
 
