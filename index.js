@@ -71,12 +71,12 @@ const handleUpload = async (req,res,next)=>{
             //     }
                 
             // })
-            requestmod(`https://dry-coast-77112.herokuapp.com/?info=${newstring}`,(err,res,body)=>{
+            requestmod(`https://dry-coast-77112.herokuapp.com/?info=${newstring}`,(err,rest,body)=>{
                 if(err){
                     console.log(err)
                 }
                 else{
-                    console.log(body)
+                    res.send(body)
                 }
             })
 
