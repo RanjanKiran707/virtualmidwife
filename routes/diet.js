@@ -62,7 +62,7 @@ diet.post("/add",(req,res)=>{
                     res.status(501).send("Could not add")
                 }
                 else{
-                    res.status(200).send("Plan added")
+                    res.status(200).send("Plan")
                 }
             })
         }
