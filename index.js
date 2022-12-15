@@ -146,6 +146,7 @@ app.use("/diet",diet);
 app.get("/",(req,res)=>{
     res.send(`You have reached the server for Symbiot VAR TEMP team.`)
 })
+console.log("Test")
 app.post("/adduser",async (req,res)=>{
     const user = new User({
          name:"Pratap Simha",
