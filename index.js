@@ -30,6 +30,7 @@ const port = process.env.PORT||4000
 }).catch(()=>{
     console.log("Error in connecting to the database! and going")
 })
+console.log("hey")
 
 //check whether the date is past or future
 const checkDate = (date)=>{ 
