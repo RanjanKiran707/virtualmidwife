@@ -31,6 +31,41 @@ const port = process.env.PORT||4000
     console.log("Error in connecting to the database! and going")
 })
 
+//check whether the date is past or future
+const checkDate = (date)=>{ 
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10) { 
+        dd='0'+dd
+    }
+    if(mm<10) {
+        mm='0'+mm
+    }
+    today = yyyy+'-'+mm+'-'+dd;
+    if(today>date){
+        return true
+    }
+    else{
+        return false
+    }
+
+    }
+
+//get user info from the database
+const getUserInfo = async (req,res,next)=>{ 
+    const user = await User.findById(req.user._id)
+    if(!user){
+        return res.status(404).send('User not found')
+    }
+    req.user = user
+    next()
+}
+
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.get("/viewusers",async (req,res)=>{

@@ -8,7 +8,7 @@ forum.post("/addquestion",(req,res)=>{
         if(err){
             res.status(501).send("An error occured");
 
-        }
+        } 
         else{
             const addquestion = new Questions({
                 user:response.name,
