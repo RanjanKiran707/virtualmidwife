@@ -20,20 +20,19 @@ The user authentication routes are as follows-
  
  # API Endpoints for Diet plans that doctors provide to the patients:
   
-   #POST REQUESTS:
+   # POST REQUESTS:
 
-   ##Add the diet plan: /diet/add 
+   ## Add the diet plan: /diet/add 
     Parameters required - {email, plan}
     Note: The plan is just a string containing the meals advised by the doctor.
 
-   ##Update water tracker: /diet/updatewater
+   ## Update water tracker: /diet/updatewater
     Parameters required - {litre}
     Please pass the email of the user as a query parameter in the URL.
 
-   #GET REQUESTS
+   # GET REQUESTS
    
-   
-    ##Get the meal plan of a user - /diet/getmealplan
+    ## Get the meal plan of a user - /diet/getmealplan
     Please pass the email of the user as a query parameter in the URL.
    
    
