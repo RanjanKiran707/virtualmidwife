@@ -134,10 +134,15 @@ const handleUpload = async (req, res, next) => {
     // res.send("file has been uploaded");
 }
 
-var cors = require('cors');
 
 // use it before all route definitions
-app.use(cors({ origin: 'https://ranjankiran707.github.io/' }));
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,PATCH,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    console.log("Request received")
+    next();
+});
 app.use("/auth", auth);
 app.use("/details", userinfo);
 app.use("/inventory", inventory);
